@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:54:51 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/18 17:27:22 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/19 15:33:32 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,20 @@ typedef struct s_args
 	int	n_to_eat;
 }			t_args;
 
+typedef struct s_philo
+{
+	int id_philo;
+	pthread_mutex_t * fork_one;
+	pthread_mutex_t * fork_two;
+	unsigned int n_meals;
+	t_data		*data;
+}				t_philo;
+
 typedef struct s_data
 {
 	struct s_args	args;
+	pthread_mutex_t *forks_mutex;
+	t_philo 		*philo;
 }			t_data;
 
 /*_____a_____*/

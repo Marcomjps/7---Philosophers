@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:39:38 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/18 17:27:33 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/19 12:45:07 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ int	verify_args(t_args *args, int argc, char **argv)
 {
 	int	i;
 
-	if (argc < 6 || argc > 7)
+	if (argc < 5 || argc > 6)
 		return (print_and_return_value(0, 
-				"O programa só pode receber de 5 a 6 args"));
+				"O programa só pode receber de 4 a 5 args"));
 	i = 1;
 	while (i < argc)
 	{
