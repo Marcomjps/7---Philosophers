@@ -6,9 +6,11 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:52:57 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/19 17:28:41 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/19 21:22:37 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philosophers.h"
 
 int ft_init_philo(t_data *data)
 {

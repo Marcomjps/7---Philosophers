@@ -6,7 +6,7 @@
 #    By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:18:45 by marsilva          #+#    #+#              #
-#    Updated: 2023/09/18 16:21:19 by marsilva         ###   ########.fr        #
+#    Updated: 2023/09/19 21:23:28 by marsilva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,11 @@ LIB			= $(LIB_PATH)$(LIB_NAME)
 
 #SOURCES
 
-SOURCES		=	a_philosophers.c\
-				b_build_struck.c\
-				c_verify_args.c\
-				Utils.c
+SOURCES		=	a_philosophers.c	\
+				b_build_struck.c	\
+				c_verify_args.c		\
+				d_init.c			\
+				z_utils.c
 
 
 
