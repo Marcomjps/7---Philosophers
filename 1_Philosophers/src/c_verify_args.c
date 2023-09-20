@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:39:38 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/19 21:20:28 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/20 15:42:02 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int	verify_args(t_args *args, int argc, char **argv)
 		i++;
 	}
 	if (args->n_philo < 1)
+	{
 		return (print_and_return_value(0,
 				"O programa tem de conter pelo menos um philosoper"));
+	}
 	return(1);
 }

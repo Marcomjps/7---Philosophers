@@ -6,14 +6,13 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:54:51 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/19 21:24:39 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/20 16:57:49 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -32,12 +31,7 @@ typedef struct s_args
 	int	n_to_eat;
 }			t_args;
 
-typedef struct s_data
-{
-	struct s_args	args;
-	pthread_mutex_t *forks_mutex;
-	t_philo 		*philo;
-}			t_data;
+struct t_data;
 
 typedef struct s_philo
 {
@@ -45,10 +39,18 @@ typedef struct s_philo
 	pthread_mutex_t * fork_one;
 	pthread_mutex_t * fork_two;
 	unsigned int n_meals;
-	t_data		*data;
+	struct t_data	*data;
 	pthread_t	philo_tread;
 }				t_philo;
 
+
+typedef struct s_data
+{
+	struct s_args	args;
+	pthread_mutex_t *forks_mutex;
+	t_philo 		*philo;
+	unsigned long	time;
+}			t_data;
 
 
 /*_____a_____*/
@@ -68,7 +70,16 @@ int ft_init_mutex(t_data *data);
 int malloc_vars_to_init(t_data *data);
 int	ft_init (t_data *data);
 /*___________*/
+/*_____e_____*/
+void *routine(void *phi);
+int create_all_treads(t_data *data);
+int	ft_start_treads(t_data *data);
+/*___________*/
 /*_____z_____*/
 int	print_and_return_value(int value, char *string);
+unsigned long	get_time(void);
+int	ft_atoi(const char *str);
+size_t	ft_strlen(const char *c);
+void	ft_putendl_fd(char *str, int fd);
 /*___________*/
 #endif

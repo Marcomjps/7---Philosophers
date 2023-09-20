@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:52:57 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/19 21:22:37 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/20 14:38:12 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ int ft_init_philo(t_data *data)
 	int i;
 
 	i = 0;
-	while( i < data->args->n_philo)
+	while( i < data->args.n_philo)
 	{
-		data->philo[i]->id_philo = (i + 1);
-		data->philo[i]->fork_one = data->forks_mutex[i];
-		if(i + 1 < data->args->n_philo)
-			data->philo[i]->fork_two = data->forks_mutex[i+1];
+		data->philo[i].id_philo = (i + 1);
+		data->philo[i].fork_one = &data->forks_mutex[i];
+		if(i + 1 < data->args.n_philo)
+			data->philo[i].fork_two = &data->forks_mutex[i+1];
 		else if(i != 0)
-			data->philo[i]->fork_two = data->forks_mutex[0];
+			data->philo[i].fork_two = &data->forks_mutex[0];
 		else
-			data->philo[i]->fork_two = 0;
-		data->philo[i]->n_meals = 0;
-		data->philo[i]->data = data;
+			data->philo[i].fork_two = 0;
+		data->philo[i].n_meals = 0;
+		data->philo[i].data =(struct t_data*) data;
 		i++;
 	}
 	return(1);
@@ -41,9 +41,9 @@ int ft_init_mutex(t_data *data)
 
   i = 0;
 
-  while( i < data->args->n_phil)
+  while( i < data->args.n_philo)
   {
-	if(pthread_mutex_init(&(data->forks_mutex), NULL));
+	if(pthread_mutex_init((data->forks_mutex), NULL))
 		return(0);
 	i++;
   }
@@ -52,10 +52,10 @@ int ft_init_mutex(t_data *data)
 
 int malloc_vars_to_init(t_data *data)
 {
-	data->forks_mutex = malloc(sizeof(pthread_mutex_t) * (data->args->n_philo + 1));
+	data->forks_mutex = malloc(sizeof(pthread_mutex_t) * (data->args.n_philo + 1));
 	if(!data->forks_mutex)
 		return(0);
-	data->philo = malloc(sizeof(t_philo) * (data->args->n_philo + 1));
+	data->philo = malloc(sizeof(t_philo) * (data->args.n_philo + 1));
 	if(!data->philo)
 	{
 		free(data->forks_mutex);

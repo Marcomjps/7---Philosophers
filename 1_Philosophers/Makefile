@@ -6,7 +6,7 @@
 #    By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:18:45 by marsilva          #+#    #+#              #
-#    Updated: 2023/09/19 21:23:28 by marsilva         ###   ########.fr        #
+#    Updated: 2023/09/20 16:47:06 by marsilva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME	=	philo
 
 # Compilador
 CC		:=	cc
-FlagM	:=	-Wall -Wextra -Werror
+FlagM	:=	-Wall -Wextra -Werror -pthread
 # -g -fsanitize=address
 
 CCC		:=	$(CC)
@@ -30,7 +30,7 @@ RM		:=	rm -f
 
 
 
-CFLAGS	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -L. -lXext -L. -lX11
+CFLAGS	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -L. -lXext -L. -lX11 
 
 #_______________________#
 #						#
@@ -45,19 +45,25 @@ CFLAGS	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -L. -lXext -L. -lX11
 SRCDIR := ./src/
 
 #arquivos .h
-INCDIR :=	-I ./assets/include/	\
-		-I ./assets/libft
+INCDIR :=	-I ./assets/include/	
+#		-I ./assets/libft			\
+#		-I ./assets/ft_printf
 
 #saída de objetos
 OBJDIR := ./obj/
 
 #bibloteca.a
-MLX_PATH	= ./minilibx-linux/
-MLX_NAME	= libmlx.a
-MLX			= $(MLX_PATH)$(MLX_NAME)
-LIB_PATH	= ./assets/libft/
-LIB_NAME	= libft.a
-LIB			= $(LIB_PATH)$(LIB_NAME)
+#MLX_PATH	= ./minilibx-linux/
+#MLX_NAME	= libmlx.a
+#MLX			= $(MLX_PATH)$(MLX_NAME)
+
+#LIB_PATH	= ./assets/libft/
+#LIB_NAME	= libft.a
+#LIB			= $(LIB_PATH)$(LIB_NAME)
+
+#PRT_PATH	= ./assets/ft_printf/
+#PRT_NAME	= ft_printf.h
+#PRT			= $(PRT_PATH)$(PRT_NAME)
 #----------------------
 
 #SOURCES
@@ -66,6 +72,7 @@ SOURCES		=	a_philosophers.c	\
 				b_build_struck.c	\
 				c_verify_args.c		\
 				d_init.c			\
+				e_treads.c			\
 				z_utils.c
 
 
@@ -85,16 +92,20 @@ OBJECTS	= $(addprefix $(OBJDIR), $(OBJS))
 #-------------------------------------
 
 # Regra principal
-all: $(LIB) $(NAME)
+#all: $(LIB) $(PRT) $(NAME)
+all:$(NAME)
 
-$(MLX):
-	@make -sC $(MLX_PATH) all
+#$(MLX):
+#	@make -sC $(MLX_PATH) all
 
-$(LIB):
-	@make -sC $(LIB_PATH) all
+#$(LIB):
+#	@make -sC $(LIB_PATH) all
+
+#$(PRT):
+#	@make -sC $(PRT_PATH) all
 # Regra para o programa executável
-$(NAME): $(LIB) $(OBJECTS)
-	$(CCC) -o $(NAME) $(OBJECTS) ./assets/libft/libft.a $(INCDIR)
+$(NAME): $(OBJECTS)
+	$(CCC) -o $(NAME) $(OBJECTS) $(INCDIR) -pthread
 
 
 $(OBJECTS):		| $(OBJDIR)
@@ -113,12 +124,11 @@ $(OBJDIR):
 
 clean:
 	rm -rf $(OBJDIR)
-	@make -sC $(LIB_PATH) fclean
+	
 
 # Limpar os arquivos objetos e o executável
 fclean:
 	rm -rf $(OBJDIR) $(NAME)
-	@make -sC $(LIB_PATH) fclean
 
 # Limpar os arquivos objetos e o executável e executar regra principal
 re:	fclean all
