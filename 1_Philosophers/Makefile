@@ -6,7 +6,7 @@
 #    By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:18:45 by marsilva          #+#    #+#              #
-#    Updated: 2023/09/20 16:47:06 by marsilva         ###   ########.fr        #
+#    Updated: 2023/09/20 17:57:04 by marsilva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SOURCES		=	a_philosophers.c	\
 				c_verify_args.c		\
 				d_init.c			\
 				e_treads.c			\
+				f_actions.c			\
 				z_utils.c
 
 

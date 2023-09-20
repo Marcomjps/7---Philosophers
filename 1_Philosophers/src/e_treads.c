@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:53 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/20 17:12:56 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:23:36 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,17 @@
 void *routine(void *phi)
 {
 	t_philo *philo;
-
-	philo = (t_philo *)phi;
 	
-	if(philo->id_philo % 2 == 1)
+	usleep(1000);
+	philo = (t_philo *)phi;
+	if((philo->id_philo) % 2 == 0)
 		usleep(9000);
-	write(1,"hey\n", 4);
-	printf("philo n:%i\n", philo->id_philo);
+	while(1)
+	{
+	ft_philo_eat(philo);
+	ft_philo_sleep(philo);
+	
+	}
 	return(NULL);
 }
 

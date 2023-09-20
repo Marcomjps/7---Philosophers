@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:54:51 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/20 16:57:49 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:17:06 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_args
 	int	n_to_eat;
 }			t_args;
 
-struct t_data;
+//struct s_data;
 
 typedef struct s_philo
 {
@@ -39,7 +39,7 @@ typedef struct s_philo
 	pthread_mutex_t * fork_one;
 	pthread_mutex_t * fork_two;
 	unsigned int n_meals;
-	struct t_data	*data;
+	void	*data;
 	pthread_t	philo_tread;
 }				t_philo;
 
@@ -75,6 +75,11 @@ void *routine(void *phi);
 int create_all_treads(t_data *data);
 int	ft_start_treads(t_data *data);
 /*___________*/
+/*_____f_____*/
+void t_print_philo_(char *str, t_philo *philo);
+int ft_philo_eat(t_philo *philo);
+int ft_philo_sleep(t_philo *philo);
+/*___________*/
 /*_____z_____*/
 int	print_and_return_value(int value, char *string);
 unsigned long	get_time(void);
@@ -82,4 +87,8 @@ int	ft_atoi(const char *str);
 size_t	ft_strlen(const char *c);
 void	ft_putendl_fd(char *str, int fd);
 /*___________*/
+/*______zii____*/
+char	*ft_itoa(int n);
+/*___________*/
+
 #endif
