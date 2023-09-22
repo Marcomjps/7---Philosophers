@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:54:51 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/20 21:17:06 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:30:34 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_philo
 	unsigned int n_meals;
 	void	*data;
 	pthread_t	philo_tread;
+	unsigned long time_eat;
 }				t_philo;
 
 
@@ -49,6 +50,8 @@ typedef struct s_data
 	struct s_args	args;
 	pthread_mutex_t *forks_mutex;
 	t_philo 		*philo;
+	pthread_t	*monitoring;
+	pthread_mutex_t	mtx_eat;
 	unsigned long	time;
 }			t_data;
 
@@ -76,9 +79,10 @@ int create_all_treads(t_data *data);
 int	ft_start_treads(t_data *data);
 /*___________*/
 /*_____f_____*/
-void t_print_philo_(char *str, t_philo *philo);
+int t_print_philo_(char *str, t_philo *philo);
 int ft_philo_eat(t_philo *philo);
 int ft_philo_sleep(t_philo *philo);
+int ft_philo_thinking(t_philo *philo);
 /*___________*/
 /*_____z_____*/
 int	print_and_return_value(int value, char *string);

@@ -6,7 +6,7 @@
 #    By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:18:45 by marsilva          #+#    #+#              #
-#    Updated: 2023/09/20 17:57:04 by marsilva         ###   ########.fr        #
+#    Updated: 2023/09/22 18:10:57 by marsilva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,15 @@ NAME	=	philo
 
 # Compilador
 CC		:=	cc
-FlagM	:=	-Wall -Wextra -Werror -pthread
+CFLAGS	:=	-Wall -Wextra -Werror -pthread 
+#-TSAN_OPTIONS=second_deadlock_stack=1
+#-fsanitize=thread -g 
 # -g -fsanitize=address
 
-CCC		:=	$(CC)
 #$(FlagM)
 
 
 RM		:=	rm -f
-
-
-
-CFLAGS	:= -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -L. -lXext -L. -lX11 
 
 #_______________________#
 #						#
@@ -46,7 +43,7 @@ SRCDIR := ./src/
 
 #arquivos .h
 INCDIR :=	-I ./assets/include/	
-#		-I ./assets/libft			\
+#		-I ./assets/libft			
 #		-I ./assets/ft_printf
 
 #saída de objetos
@@ -106,12 +103,11 @@ all:$(NAME)
 #	@make -sC $(PRT_PATH) all
 # Regra para o programa executável
 $(NAME): $(OBJECTS)
-	$(CCC) -o $(NAME) $(OBJECTS) $(INCDIR) -pthread
-
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(INCDIR)
 
 $(OBJECTS):		| $(OBJDIR)
 $(OBJDIR)%.o: $(SRCDIR)%.c
-				@$(CCC) -c $< -o $@ $(INCDIR)
+				@$(CC) $(CFLAGS) -c $< -o $@ $(INCDIR)
 
 
 $(OBJDIR):

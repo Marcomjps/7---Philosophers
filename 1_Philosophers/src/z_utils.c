@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 10:12:03 by sgoffaux          #+#    #+#             */
-/*   Updated: 2023/09/20 15:24:40 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/21 15:28:58 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned long	get_time(void)
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
-	return ((time.tv_sec * (unsigned long)1000) + (time.tv_usec / 1000));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	ft_atoi(const char *str)
