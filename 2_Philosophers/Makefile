@@ -19,9 +19,9 @@ NAME	=	philo
 
 # Compilador
 CC		:=	cc
-CFLAGS	:=	-Wall -Wextra -Werror -pthread -fsanitize=thread 
+CFLAGS	:=	-Wall -Wextra -Werror -pthread -g
 #-TSAN_OPTIONS=second_deadlock_stack=1
-
+#  -fsanitize=thread 
 # -g -fsanitize=address
 
 #$(FlagM)
