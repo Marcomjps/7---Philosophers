@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 14:55:53 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/26 14:56:02 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/26 17:35:14 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void *routine(void *phi)
 {
 	t_philo *philo;
-	
+	t_data *data;
+
 	philo = (t_philo *)phi;
+	data = (void*)philo->data;
+	
 	if((philo->id_philo) % 2 == 0)
 		usleep(2000);
 	while(1)
@@ -25,6 +28,7 @@ void *routine(void *phi)
 		break;
 	if(!ft_philo_sleep(philo))
 		break;
+	//time_stop(data->args.time_to_sleep);
 	if(!ft_philo_thinking(philo))
 		break;
 	}
@@ -44,17 +48,23 @@ int stop_condition(t_data *data)
 	{
 		if (i >= data->args.n_philo)
 		{
+		//	printf("eat_count = %i\n", eat_count);
 			i = 0;
 			eat_count = 0;
+			usleep(250);
 		}
-		usleep(300);
 		pthread_mutex_lock(&data->mtx_eat);
 		if((unsigned long)(data->args.time_to_die) <= (get_time() - data->philo[i].time_eat))
-			return(i+ 1);
-		//if(data->args.n_to_eat != 0 && data->philo[i].times >= data->args.n_to_eat)
-		//	eat_count++;
+			{
+			pthread_mutex_unlock(&data->mtx_eat);
+			return(i+ 1);	
+			}
+		if(data->args.n_to_eat != 0 && data->philo[i].times >= data->args.n_to_eat)
+			eat_count++;
 		pthread_mutex_unlock(&data->mtx_eat);
 		i++;
+		if(eat_count == data->args.n_philo)
+			return(0);
 	}
 	return(0);
 }
@@ -70,7 +80,8 @@ void *monitoring(void *dat)
 	pthread_mutex_lock(&data->mtx_cd_stop);
 	data->cd_stop = 1;
 	pthread_mutex_unlock(&data->mtx_cd_stop);
-	printf("%li %i died\n",get_time()- data->time, i);
+	if(i > 0)
+		printf("%li %i died\n",get_time()- data->time, i);
 	return(NULL);
 }
 
@@ -106,7 +117,6 @@ int	ft_start_treads(t_data *data)
 		i++;
 	}
 	pthread_join(*data->monitoring, NULL);
-	printf("tempo=%lu\n", data->time);
 	return (1);
 
 	

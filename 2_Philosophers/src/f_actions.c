@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 17:25:52 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/26 15:13:58 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:52:18 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,18 @@ int ft_philo_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&data->mtx_eat);
 	philo->time_eat = get_time();
-	//philo->times++;
 	pthread_mutex_unlock(&data->mtx_eat);
 	time_stop(data->args.time_to_eat);
+	pthread_mutex_lock(&data->mtx_eat);
+	philo->times++;
+	pthread_mutex_unlock(&data->mtx_eat);
+	/*if(!ft_philo_sleep(philo))
+	{
+		pthread_mutex_unlock(philo->fork_one);
+		pthread_mutex_unlock(philo->fork_two);
+		return(0);
+	}*/
+	usleep(300);
 	pthread_mutex_unlock(philo->fork_one);
 	pthread_mutex_unlock(philo->fork_two);
 	return(1);

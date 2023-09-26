@@ -6,7 +6,7 @@
 #    By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/09 17:18:45 by marsilva          #+#    #+#              #
-#    Updated: 2023/09/26 15:14:30 by marsilva         ###   ########.fr        #
+#    Updated: 2023/09/26 17:42:57 by marsilva         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ NAME	=	philo
 
 # Compilador
 CC		:=	cc
-CFLAGS	:=	-Wall -Wextra -Werror -pthread
+CFLAGS	:=	-Wall -Wextra -Werror -pthread -fsanitize=thread 
 #-TSAN_OPTIONS=second_deadlock_stack=1
-#-fsanitize=thread -g 
+
 # -g -fsanitize=address
 
 #$(FlagM)
@@ -71,6 +71,7 @@ SOURCES		=	a_philosophers.c	\
 				d_init.c			\
 				e_treads.c			\
 				f_actions.c			\
+				g_destroy.c			\
 				z_utils.c
 
 

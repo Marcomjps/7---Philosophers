@@ -6,7 +6,7 @@
 /*   By: marsilva <marsilva@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 13:54:51 by marsilva          #+#    #+#             */
-/*   Updated: 2023/09/26 14:36:38 by marsilva         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:23:51 by marsilva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ void	ft_putendl_fd(char *str, int fd);
 /*______zii____*/
 char	*ft_itoa(int n);
 /*___________*/
-
+void time_stop(int time);
+void free_memory(t_data *data);
 #endif
