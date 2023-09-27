@@ -16,10 +16,13 @@ void *routine(void *phi)
 {
 	t_philo *philo;
 	t_data *data;
-
+	
 	philo = (t_philo *)phi;
 	data = (void*)philo->data;
 	
+	pthread_mutex_lock(&data->mtx_eat);
+	philo->times = 0;
+	pthread_mutex_unlock(&data->mtx_eat);
 	if((philo->id_philo) % 2 == 0)
 		usleep(2000);
 	while(1)

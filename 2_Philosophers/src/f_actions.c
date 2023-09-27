@@ -30,6 +30,7 @@ int t_print_philo_(char *str, t_philo *philo)
 		pthread_mutex_unlock(&data->mtx_cd_stop);
 		return(0);
 	}
+	
 	pthread_mutex_unlock(&data->mtx_cd_stop);
 	printf("%lu %i %s\n", get_time() - data->time, philo->id_philo, str);
 	
