@@ -12,22 +12,21 @@
 
 #include "philosophers.h"
 
-void destoy_treads(t_data *data)
+void	destoy_treads(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while( i < data->args.n_philo)
+	while (i < data->args.n_philo)
 	{
 		pthread_mutex_destroy(&data->forks_mutex[i]);
 		i++;
 	}
- 	pthread_mutex_destroy(&data->mtx_eat);
-	
+	pthread_mutex_destroy(&data->mtx_eat);
 	pthread_mutex_destroy(&data->mtx_cd_stop);
 }
 
-void free_memory(t_data *data)
+void	free_memory(t_data *data)
 {
 	destoy_treads(data);
 	free(data->philo);
