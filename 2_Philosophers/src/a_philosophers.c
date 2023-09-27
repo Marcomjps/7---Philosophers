@@ -16,6 +16,11 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	if (argc < 5 || argc > 6)
+	{
+		printf("Error: wrong number of arguments\n");
+		return (0);
+	}
 	if (!b_struck_args(&data.args, argc, argv))
 		return (0);
 	if (!ft_init(&data))

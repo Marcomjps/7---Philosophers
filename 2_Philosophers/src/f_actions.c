@@ -12,11 +12,6 @@
 
 #include "philosophers.h"
 
-void	time_stop(int time)
-{
-	usleep(time * 1000);
-}
-
 int	t_print_philo_(char *str, t_philo *philo)
 {
 	t_data	*data;
@@ -33,6 +28,28 @@ int	t_print_philo_(char *str, t_philo *philo)
 	return (1);
 }
 
+int	ft_philo_eat_ii(t_philo *philo, t_data *data)
+{
+	pthread_mutex_lock(philo->fork_two);
+	if (!t_print_philo_("has taken a fork", philo) || 
+		!t_print_philo_("is eating", philo))
+	{
+		pthread_mutex_unlock(philo->fork_one);
+		pthread_mutex_unlock(philo->fork_two);
+		return (0);
+	}
+	pthread_mutex_lock(&data->mtx_eat);
+	philo->time_eat = get_time();
+	pthread_mutex_unlock(&data->mtx_eat);
+	time_stopp(data->args.time_to_eat);
+	pthread_mutex_lock(&data->mtx_eat);
+	philo->times++;
+	pthread_mutex_unlock(&data->mtx_eat);
+	pthread_mutex_unlock(philo->fork_one);
+	pthread_mutex_unlock(philo->fork_two);
+	return (1);
+}
+
 int	ft_philo_eat(t_philo *philo)
 {
 	t_data	*data;
@@ -42,7 +59,7 @@ int	ft_philo_eat(t_philo *philo)
 	if (data->args.n_philo == 1)
 	{
 		t_print_philo_("has taken a fork", philo);
-		time_stop(data->args.time_to_die);
+		time_stopp(data->args.time_to_die);
 		pthread_mutex_unlock(philo->fork_one);
 		return (0);
 	}
@@ -51,23 +68,7 @@ int	ft_philo_eat(t_philo *philo)
 		pthread_mutex_unlock(philo->fork_one);
 		return (0);
 	}
-	pthread_mutex_lock(philo->fork_two);
-	if (!t_print_philo_("has taken a fork", philo) || !t_print_philo_("is eating", philo))
-	{
-		pthread_mutex_unlock(philo->fork_one);
-		pthread_mutex_unlock(philo->fork_two);
-		return (0);
-	}
-	pthread_mutex_lock(&data->mtx_eat);
-	philo->time_eat = get_time();
-	pthread_mutex_unlock(&data->mtx_eat);
-	time_stop(data->args.time_to_eat);
-	pthread_mutex_lock(&data->mtx_eat);
-	philo->times++;
-	pthread_mutex_unlock(&data->mtx_eat);
-	pthread_mutex_unlock(philo->fork_one);
-	pthread_mutex_unlock(philo->fork_two);
-	return (1);
+	return (ft_philo_eat_ii(philo, data));
 }
 
 int	ft_philo_sleep(t_philo *philo)
@@ -78,7 +79,7 @@ int	ft_philo_sleep(t_philo *philo)
 	usleep(300);
 	if (!t_print_philo_("is sleeping", philo))
 		return (0);
-	time_stop(data->args.time_to_sleep);
+	time_stopp(data->args.time_to_sleep);
 	return (1);
 }
 

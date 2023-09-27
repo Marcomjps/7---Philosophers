@@ -55,3 +55,15 @@ char	*ft_itoa(int n)
 	}
 	return (str);
 }
+
+void	time_stopp(int time)
+{
+	usleep(time * 1000);
+}
+
+void	reset_counters(int *i, int *eat_count, int time)
+{
+	*i = 0;
+	*eat_count = 0;
+	usleep(time);
+}

@@ -90,7 +90,9 @@ void				ft_putendl_fd(char *str, int fd);
 /*___________*/
 /*______zii____*/
 char				*ft_itoa(int n);
+void				time_stopp(int time);
+void				reset_counters(int *i, int *eat_count, int time);
 /*___________*/
-void				time_stop(int time);
+//void				time_stop(int time);
 void				free_memory(t_data *data);
 #endif

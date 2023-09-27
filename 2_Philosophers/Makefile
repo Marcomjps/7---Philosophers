@@ -72,7 +72,8 @@ SOURCES		=	a_philosophers.c	\
 				e_treads.c			\
 				f_actions.c			\
 				g_destroy.c			\
-				z_utils.c
+				z_utils.c			\
+				z_utilsii.c
 
 
 

@@ -12,6 +12,15 @@
 
 #include "philosophers.h"
 
+void	ft_init_philo_ii(t_data *data, int i)
+{
+	data->philo[i].fork_one = &data->forks_mutex[i];
+	if (i == (data->args.n_philo - 1))
+		data->philo[i].fork_two = &data->forks_mutex[0];
+	else
+		data->philo[i].fork_two = &data->forks_mutex[i + 1];
+}
+
 int	ft_init_philo(t_data *data)
 {
 	int	i;
@@ -29,15 +38,9 @@ int	ft_init_philo(t_data *data)
 				data->philo[i].fork_one = &data->forks_mutex[i + 1];
 		}
 		else
-		{
-			data->philo[i].fork_one = &data->forks_mutex[i];
-			if (i == (data->args.n_philo - 1))
-				data->philo[i].fork_two = &data->forks_mutex[0];
-			else
-				data->philo[i].fork_two = &data->forks_mutex[i + 1];
-		}
+			ft_init_philo_ii(data, i);
 		data->philo[i].n_meals = 0;
-		data->philo[i].data = (struct t_data*) data;
+		data->philo[i].data = (struct t_data *) data;
 		i++;
 	}
 	return (1);
