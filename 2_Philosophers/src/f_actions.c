@@ -43,6 +43,13 @@ int ft_philo_eat(t_philo *philo)
 
 	data = (void*)philo->data;
 	pthread_mutex_lock(philo->fork_one);
+	if(data->args.n_philo == 1)
+	{
+		t_print_philo_("has taken a fork", philo);
+		time_stop(data->args.time_to_die);
+		pthread_mutex_unlock(philo->fork_one);
+		return(0);
+	}
 	if(!t_print_philo_("has taken a fork", philo))
 	{
 		pthread_mutex_unlock(philo->fork_one);
