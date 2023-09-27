@@ -73,6 +73,8 @@ int					ft_init(t_data *data);
 /*_____e_____*/
 void				*routine(void *phi);
 int					create_all_treads(t_data *data);
+void				*monitoring(void *dat);
+int					create_all_treads(t_data *data);
 int					ft_start_treads(t_data *data);
 /*___________*/
 /*_____f_____*/
@@ -80,6 +82,10 @@ int					t_print_philo_(char *str, t_philo *philo);
 int					ft_philo_eat(t_philo *philo);
 int					ft_philo_sleep(t_philo *philo);
 int					ft_philo_thinking(t_philo *philo);
+/*___________*/
+/*_____g_____*/
+void				destoy_treads(t_data *data);
+void				free_memory(t_data *data);
 /*___________*/
 /*_____z_____*/
 int					print_and_return_value(int value, char *string);
@@ -94,5 +100,5 @@ void				time_stopp(int time);
 void				reset_counters(int *i, int *eat_count, int time);
 /*___________*/
 //void				time_stop(int time);
-void				free_memory(t_data *data);
+
 #endif
