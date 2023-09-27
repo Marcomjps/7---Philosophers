@@ -12,16 +12,16 @@
 
 #include "philosophers.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
-	if (!b_struck_args( &data.args ,argc ,argv))
+	if (!b_struck_args(&data.args, argc, argv))
 		return (0);
-	if (!ft_init (&data))	
-		return(0);
-	if (!ft_start_treads(&data))	
-		return(0);
+	if (!ft_init(&data))
+		return (0);
+	if (!ft_start_treads(&data))
+		return (0);
 	free_memory(&data);
 	return (1);
 }

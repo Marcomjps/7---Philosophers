@@ -26,38 +26,61 @@ int	veryfy_pos_int(char *str)
 	return (1);
 }
 
-unsigned long long	ft_atoll(char *str) 
+unsigned long long	ft_atoll(char *str)
 {
-	long long	result = 0;
-	int			negativo = 0;
+	long long	result;
+	int			negativo;
 
-	if (*str == '-') {
+	result = 0;
+	negativo = 0;
+	if (*str == '-')
+	{
 		negativo = 1;
 		str++;
 	}
-
-	while (*str >= '0' && *str <= '9') {
+	while (*str >= '0' && *str <= '9')
+	{
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-
-	if (negativo) {
+	if (negativo)
 		result = -result;
-	}
-
-	return result;
+	return (result);
 }
 
-int bigger_than_int_max(char *str)
+int	bigger_than_int_max(char *str)
 {
-	long long num = ft_atoll(str);
+	long long	num;
 
-	if (num > INT_MAX || ft_strlen(str) > 10) {
-		return 1;
-	} else {
-		return 0;
-	}	
+	num = ft_atoll(str);
+	if (num > INT_MAX || ft_strlen(str) > 10)
+	{
+		return (1);
+	}
+	else
+		return (0);
 }
+
+int	verify_args_ii(t_args *args, int argc, char **argv)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (bigger_than_int_max(argv[i]) == 1)
+			return (print_and_return_value(0, 
+					"Os argumentos tem de ser menores que o INT_MAX"));
+		i++;
+	}
+	if (args->n_philo < 1)
+	{
+		return (print_and_return_value(0,
+				"O programa tem de conter pelo menos um philosoper"));
+	}
+	return (1);
+}
+
 int	verify_args(t_args *args, int argc, char **argv)
 {
 	int	i;
@@ -73,18 +96,5 @@ int	verify_args(t_args *args, int argc, char **argv)
 					"Os argumentos tem de ser numeros positivos"));
 		i++;
 	}
-	i = 1;
-	while (i < argc)
-	{
-		if (bigger_than_int_max(argv[i]) == 1)
-			return (print_and_return_value(0, 
-					"Os argumentos tem de ser menores que o INT_MAX"));
-		i++;
-	}
-	if (args->n_philo < 1)
-	{
-		return (print_and_return_value(0,
-				"O programa tem de conter pelo menos um philosoper"));
-	}
-	return(1);
+	return (verify_args_ii(args, argc, argv));
 }

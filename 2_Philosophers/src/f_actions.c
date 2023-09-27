@@ -30,9 +30,9 @@ int t_print_philo_(char *str, t_philo *philo)
 		pthread_mutex_unlock(&data->mtx_cd_stop);
 		return(0);
 	}
-	
-	pthread_mutex_unlock(&data->mtx_cd_stop);
 	printf("%lu %i %s\n", get_time() - data->time, philo->id_philo, str);
+	pthread_mutex_unlock(&data->mtx_cd_stop);
+	
 	
 	return(1);
 }
@@ -85,6 +85,7 @@ int ft_philo_sleep(t_philo *philo)
 	t_data *data;
 
 	data = (void*)philo->data;
+	usleep(300);
 	if(!t_print_philo_("is sleeping", philo))
 		return(0);
 	time_stop(data->args.time_to_sleep);

@@ -14,7 +14,6 @@
 
 int	b_struck_args(t_args *args, int argc, char **argv)
 {
-	
 	args->n_philo = ft_atoi(argv[1]);
 	args->time_to_die = ft_atoi(argv[2]);
 	args->time_to_eat = ft_atoi(argv[3]);
@@ -23,7 +22,6 @@ int	b_struck_args(t_args *args, int argc, char **argv)
 		args->n_to_eat = ft_atoi(argv[5]);
 	else
 		args->n_to_eat = 0;
-
 	if (!verify_args(args, argc, argv))
 		return (0);
 	return (1);
